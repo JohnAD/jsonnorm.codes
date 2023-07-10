@@ -8,7 +8,7 @@ JSON is a universally recognized method of serializing data that can be
 passed between systems and people. Or, to put it more simply, it is a way
 for information to be "written out" as a readable series of characters and spaces.
 
-The spec for this can be found at https://www.json.org/
+The spec for generic JSON can be found at https://www.json.org/
 
 ## The Problem
 
@@ -18,13 +18,13 @@ in the sense that there are an almost infinite ways to express the same data.
 
 For example, this JSON document:
 
-{{< codecaption codeLang="json" copy="false">}}{"b":4,"c":[],"a":"hello"}{{< /codecaption >}}
+{{< codecaption codeLang="json" copy="false">}}{"b":40,"c":[],"a":"hello"}{{< /codecaption >}}
 
 and this JSON document:
 
 {{< codecaption codeLang="json" copy="false">}}{
     "a":   "hello",
-    "b":         4,
+    "b":     4.0e1,
     "c":[]
 }{{< /codecaption >}}
 

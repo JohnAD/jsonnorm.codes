@@ -71,8 +71,14 @@ except in strings.
 ## STRINGS
 
 Strings are encapsulated by QUOTATION MARKS (U+0022). They contain zero or
-more UTF8 characters between them. If a quotation mark or a control character
-is contain within a string, it is escaped with a backslash per the JSON spec.
+more UTF8 characters between them.
+
+If a slash, quotation mark, or control character is contained within a string, 
+it is escaped with a backslash per the JSON spec. Some will need to use the
+`\uHHHH` hex escapement.
+
+All other characters are NOT to be escaped. For example a `\u00E3` will be
+normalized to a direct `ã` character.
 
 There is no character limit to a string.
 
@@ -281,11 +287,11 @@ become 8. Essentially, a NULL is an variable whose value is not known.
 There are multiple names for this concept. In the programming language C it is
 called `void`. In paperwork, it is often called "non-applicable".
 
-It is explicitly stating that there cannot be a value, not simply that it
+It is explicitly stating that there cannot be a value; not simply that it
 is not known.
 
 In JSON, a VOID is represented by ommision. In other words, you can
-represent VOID by *not* including in the document. Because JSON structure is 
+represent VOID by *not* including a value in the document. Because JSON structure is 
 dynamic, this works quite well.
 
 An example using real world objects: 
@@ -327,7 +333,7 @@ the scope of this specification.
 
 ## NUMBERS
 
-The normalizing numbers in JSON spec has at least 5 challenges:
+Normalizing numbers in JSON spec has at least 5 challenges:
 
 1. `[infinity]` Numbers can be infinite in size. Is this realistic?
 2. `[diff exp]` With exponent support there are multiple ways to express the exact same 
@@ -340,7 +346,7 @@ The normalizing numbers in JSON spec has at least 5 challenges:
    Javascript, stores them as binary floats; not decimal floats. Binary is 
    base 2 and Decimal is base 10 (2 * 5). This causes conversion errors in some 
    circumstances. (This is not a bug but a philosophical difference between 
-   numbering systems.) Most libraries follow this convention storing in binary.
+   numbering systems.) Most libraries follow this convention of storing in binary.
 
 This section of the specification resolves these issues, but acknowledges that
 the chosen answer is not perfect for all users.
