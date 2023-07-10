@@ -1,4 +1,4 @@
-baseURL = 'http://jsonnorm.codes/'
+baseURL = 'https://jsonnorm.codes/'
 languageCode = 'en-us'
 title = 'JSON Normalized Expression'
 theme = 'hugo-theme-techdoc'

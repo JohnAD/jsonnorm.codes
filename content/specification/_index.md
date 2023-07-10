@@ -1,9 +1,7 @@
 ---
 title: "Specification of JSONNORM 1.0.0"
-date: 2023-07-08T16:57:42-05:00
+date: 2023-07-10T16:57:42-05:00
 ---
-# `JSONNORM 1.0.0`
-
 This is the specification for a normalized expresion of the JSON data
 format. This format is strictly a superset of the JSON specification defined
 at https://json.org/. That is to say, this specification is IN ADDITION TO
@@ -294,12 +292,12 @@ In JSON, a VOID is represented by ommision. In other words, you can
 represent VOID by *not* including a value in the document. Because JSON structure is 
 dynamic, this works quite well.
 
-An example using real world objects: 
+An example using nouns and leg counts: 
 
 - a spider has 8 legs,
 - a worm has zero legs (EMPTY),
 - an unknown creature trapped in a box has an unknown number of legs (NULL), but
-- an asteroid can't have legs; it is a silly question (VOID).
+- a feeling of happiness can't have legs; or it has a lot of them; it is not a legit question (VOID).
 
 An example in mathematics: 
 
@@ -387,3 +385,12 @@ Leading zeroes are not permmitted. This is already part of the JSON spec.
 Note: The IEEE 754-2008 encoding allows for infinity (`+inf` `-inf`) and not-a-number
 (`NaN`). However, neither JSON or JSONNORM documents allow for such expressions.
 
+## License and Source Code
+
+The code for this website is open source and distributed under the MIT license. Visit
+https://github.com/JohnAD/jsonnorm.codes for further details or to support
+the project or authors.
+
+The specification itself is under the Creative Commons license 
+[Attribution 4.0 International (CC BY 4.0)](https://creativecommons.org/licenses/by/4.0/)
+license. Copyright 2023 John Dupuy.
