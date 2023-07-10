@@ -1,0 +1,4 @@
+baseURL = 'http://jsonnorm.codes/'
+languageCode = 'en-us'
+title = 'JSON Normalized Expression'
+theme = 'PaperMod'
