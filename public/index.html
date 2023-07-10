@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>JSON Normalized - JSON Normalized Expression</title>
+<meta name="generator" content="Hugo 0.115.1">
+<link href="http://jsonnorm.codes//index.xml" rel="alternate" type="application/rss+xml">
+<link rel="canonical" href="http://jsonnorm.codes/">
+<link rel="stylesheet" href="http://jsonnorm.codes/css/theme.min.css">
+<link rel="stylesheet" href="http://jsonnorm.codes/css/chroma.min.css">
+<script defer src="http://jsonnorm.codes//js/fontawesome6/all.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery.easing@1.4.1/jquery.easing.min.js" integrity="sha256-H3cjtrm/ztDeuhCN9I4yh4iN2Ybx/y1RM7rMmAesA0k=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js" integrity="sha256-4XodgW4TwIJuDtf+v6vDJ39FVxI0veC/kSCCmnFp7ck=" crossorigin="anonymous"></script>
+<script src="http://jsonnorm.codes/js/bundle.js"></script><style>
+:root {}
+</style>
+<meta property="og:title" content="JSON Normalized" />
+<meta property="og:description" content="" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="http://jsonnorm.codes/" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="JSON Normalized"/>
+<meta name="twitter:description" content=""/>
+<meta itemprop="name" content="JSON Normalized">
+<meta itemprop="description" content=""></head>
+<body><div class="container"><header>
+<h1>JSON Normalized Expression</h1>
+</header>
+
+
+<div class="content-container">
+<main><h1 id="jsonnorm-100"><code>JSONNORM 1.0.0</code></h1>
+<p>JSON is a universally recognized method of serializing data that can be
+passed between systems and people. Or, to put it more simply, it is a way
+for information to be &ldquo;written out&rdquo; as a readable series of characters and spaces.</p>
+<p>The spec for generic JSON can be found at <a href="https://www.json.org/">https://www.json.org/</a></p>
+<h2 id="the-problem">The Problem</h2>
+<p>For computer-to-computer transactions, the official spec is often enough to
+generaly convey data between systems. However, the specification is &ldquo;loose&rdquo;
+in the sense that there are an almost infinite ways to express the same data.</p>
+<p>For example, this JSON document:</p>
+<div class="code sidebar-footer" id=""><div class="code-content" >
+      <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>{<span style="color:#f92672">&#34;b&#34;</span>:<span style="color:#ae81ff">40</span>,<span style="color:#f92672">&#34;c&#34;</span>:[],<span style="color:#f92672">&#34;a&#34;</span>:<span style="color:#e6db74">&#34;hello&#34;</span>}</span></span></code></pre></div>
+  </div></div>
+
+<p>and this JSON document:</p>
+<div class="code sidebar-footer" id=""><div class="code-content" >
+      <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;a&#34;</span>:   <span style="color:#e6db74">&#34;hello&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;b&#34;</span>:     <span style="color:#ae81ff">4.0e1</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;c&#34;</span>:[]
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
+  </div></div>
+
+<p>contain exactly the same data. So, the actual content of a JSON document
+cannot be</p>
+<ul>
+<li>completely predicted, or</li>
+<li>easily compared with other documents using line-oriented tools like git.</li>
+</ul>
+<h3 id="problem-1-lack-of-prediction">Problem 1: Lack of Prediction</h3>
+<p>If an application reads an &ldquo;input&rdquo; JSON document; determines that nothing should be done
+to the data; and writes a &ldquo;output&rdquo; JSON document containing that same data, the input
+and output files will be identical. Correct?</p>
+<p>In today&rsquo;s environment, they probably won&rsquo;t be. They &ldquo;effectively&rdquo; contain the
+same information, but the ordering of object fields, the spacing used, numeric
+exponent handling, and other characteristics could very easily change things.</p>
+<p>For many applications, this is might not be a problem. But for applications where
+this is a problem, we want a way to <em>normalize</em> the JSON so that the same data
+creates the exact same JSON document.</p>
+<p>If saved to files, the file should have the same length and line count. If a hash
+is calculated of the files, they should result in the exact same hash.</p>
+<p>So, that is the first goal:</p>
+<p><strong>Normalize JSON documents to an exhaustive degree that ensures that the exact
+same data creates precisely the same document.</strong></p>
+<h3 id="problem-2-changes-not-trackable">Problem 2: Changes Not Trackable</h3>
+<p>An application reads an &ldquo;input&rdquo; JSON document; but this time, it makes some
+changes to the data. It writes a &ldquo;output&rdquo; JSON document containing the changed
+data.</p>
+<p>It would be useful, especially when using tracking tools like git and diff,
+to be able to easily identify what changes have been made.</p>
+<p>To do this, not only would the JSON need to be normalized, it would need to be
+normalized in such a manner that the changes are easily tracked by line-oriented
+tools.</p>
+<p>That is the second goal:</p>
+<p><strong>Normalize JSON documents such that changes are easily tracked on a
+line-by-line basis.</strong></p>
+<h2 id="the-solution">The Solution</h2>
+<p>This website presents a formal specification called <code>JSONNORM 1.0.0</code> that creates
+a very exacting normalization. Normalized JSON is fully compliant
+with the JSON spec, so any application consuming a normalized document need not
+know that a document is normalized.</p>
+<p>See the <a href="/specification">JSONNORM specification here</a>.</p>
+<p>The website also hosts the documentation for a command line tool called
+<code>jsonnorm</code> that transforms JSON documents into the normalized form. If the
+document cannot be normalized, the reason is spelled out in detail.</p>
+<p>This tool could be used by hand, or in shell scripts, or in CI/CD pipelines.</p>
+<p>See the <a href="/tooldoc"><code>jsonnorm</code> tool documentation here</a>.</p>
+<p>There is also a set of testing files that can be used by libraries for verifying
+the normalization. These files are part of the <a href="tbd">source code repo</a>
+of <code>jsonnorm</code>.</p>
+<nav class="pagination"><a class="nav nav-next" href="http://jsonnorm.codes/specification/" title="Specification of JSONNORM 1.0.0">Next - Specification of JSONNORM 1.0.0 <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+</nav><div class="edit-meta">
+Last updated on 8 Jul 2023
+
+
+<br></div><footer><p class="powered">Powered by <a href="https://gohugo.io">Hugo</a>. Theme by <a href="https://themes.gohugo.io/hugo-theme-techdoc/">TechDoc</a>. Designed by <a href="https://github.com/thingsym/hugo-theme-techdoc">Thingsym</a>.</p>
+</footer>
+</main>
+<div class="sidebar">
+
+<nav class="open-menu">
+<ul>
+<li class="active"><a href="http://jsonnorm.codes/">Home</a></li>
+
+<li class=""><a href="http://jsonnorm.codes/specification/">Specification of JSONNORM 1.0.0</a>
+  
+</li>
+</ul>
+</nav>
+
+
+
+<div class="sidebar-footer"></div>
+</div>
+
+</div><a href="#" id="backtothetop-fixed" class="backtothetop"
+ data-backtothetop-duration="600"
+ data-backtothetop-easing="easeOutQuart"
+ data-backtothetop-fixed-fadeIn="1000"
+ data-backtothetop-fixed-fadeOut="1000"
+ data-backtothetop-fixed-bottom="10"
+ data-backtothetop-fixed-right="20">
+<span class="fa-layers fa-fw">
+<i class="fas fa-circle"></i>
+<i class="fas fa-arrow-circle-up"></i>
+</span></a>
+</div>
+</body>
+</html>

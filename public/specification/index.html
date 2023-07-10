@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>Specification of JSONNORM 1.0.0 - JSON Normalized Expression</title>
+<meta name="generator" content="Hugo 0.115.1">
+<link href="http://jsonnorm.codes//index.xml" rel="alternate" type="application/rss+xml">
+<link rel="canonical" href="http://jsonnorm.codes/specification/">
+<link rel="stylesheet" href="http://jsonnorm.codes/css/theme.min.css">
+<link rel="stylesheet" href="http://jsonnorm.codes/css/chroma.min.css">
+<script defer src="http://jsonnorm.codes//js/fontawesome6/all.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery.easing@1.4.1/jquery.easing.min.js" integrity="sha256-H3cjtrm/ztDeuhCN9I4yh4iN2Ybx/y1RM7rMmAesA0k=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js" integrity="sha256-4XodgW4TwIJuDtf+v6vDJ39FVxI0veC/kSCCmnFp7ck=" crossorigin="anonymous"></script>
+<script src="http://jsonnorm.codes/js/bundle.js"></script><style>
+:root {}
+</style>
+<meta property="og:title" content="Specification of JSONNORM 1.0.0" />
+<meta property="og:description" content="" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="http://jsonnorm.codes/specification/" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Specification of JSONNORM 1.0.0"/>
+<meta name="twitter:description" content=""/>
+<meta itemprop="name" content="Specification of JSONNORM 1.0.0">
+<meta itemprop="description" content=""></head>
+<body><div class="container"><header>
+<h1>JSON Normalized Expression</h1>
+</header>
+
+
+<div class="content-container">
+<main><h1>Specification of JSONNORM 1.0.0</h1><h1 id="jsonnorm-100"><code>JSONNORM 1.0.0</code></h1>
+<p>This is the specification for a normalized expresion of the JSON data
+format. This format is strictly a superset of the JSON specification defined
+at <a href="https://json.org/">https://json.org/</a>. That is to say, this specification is IN ADDITION TO
+the default specification. Nothing is changed or removed from the default.</p>
+<p>So, NOT all JSON documents can be stored in JSONNORM format, but &hellip;</p>
+<p>.. all JSONNORM documents are stored in fully compliant JSON format.</p>
+<p>This specification uses the phrase &ldquo;document&rdquo; to refer to a JSON
+serialization <em>in it&rsquo;s entirety.</em></p>
+<h2 id="document-must-be-based-on-an-object">DOCUMENT MUST BE BASED ON AN OBJECT</h2>
+<p>The default specification allows for any elements or values in a documents. However,
+JSONNORM limits the base element to a single object. This is very often
+what is seen in typical practice, but JSONNORM specifies this explicitly.</p>
+<div class="code sidebar-footer" id=""><div class="code-content" >
+      <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>[
+</span></span><span style="display:flex;"><span>  {
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;name&#34;</span>: <span style="color:#e6db74">&#34;Larry&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;score&#34;</span>: <span style="color:#ae81ff">4</span>
+</span></span><span style="display:flex;"><span>  },
+</span></span><span style="display:flex;"><span>  {
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;name&#34;</span>: <span style="color:#e6db74">&#34;Bob&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;score&#34;</span>: <span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>]</span></span></code></pre></div>
+  </div><span style="width: 100%; text-align: center;"><em>A document based on an array is not allowed by JSONNORM</em></span></div>
+
+<div class="code sidebar-footer" id=""><div class="code-content" >
+      <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span><span style="color:#ae81ff">4</span></span></span></code></pre></div>
+  </div><span style="width: 100%; text-align: center;"><em>A document based on a single value is not allowed by JSONNORM</em></span></div>
+
+<div class="code sidebar-footer" id=""><div class="code-content" >
+      <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;name&#34;</span>: <span style="color:#e6db74">&#34;Larry&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;score&#34;</span>: <span style="color:#ae81ff">4</span>
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
+  </div><span style="width: 100%; text-align: center;"><em>A document must always be based on an object.</em></span></div>
+
+<h2 id="lines-and-line-endings">LINES AND LINE ENDINGS</h2>
+<p>A line contains one or more UTF8 characters terminated by a LINE FEED (U+000A).</p>
+<p>This is true of all lines, including the final <code>}</code> at the end of the document.</p>
+<p>Except within strings (including names), the characters are further
+restricted to the ASCII character set.</p>
+<p>CARRIAGE RETURN and other control characters are not allowed anywhere in the
+document. Their equivalents in strings are backslash-quoted. See the JSON spec
+for further details.</p>
+<p>There is no line length limit.</p>
+<h2 id="indentation">INDENTATION</h2>
+<p>Indentation is two SPACE (U+0020) characters. All indentation rises and falls
+by increments and decrements of two SPACE characters.</p>
+<p>At the start of a document, indentation begins at zero.</p>
+<p>Every object or array causes it&rsquo;s subtending elements to be further indented
+by 2 additional SPACEs.</p>
+<p>Tabs and other UTF8 WHITESPACE characters are not allowed in the documents
+except in strings.</p>
+<h2 id="strings">STRINGS</h2>
+<p>Strings are encapsulated by QUOTATION MARKS (U+0022). They contain zero or
+more UTF8 characters between them.</p>
+<p>If a slash, quotation mark, or control character is contained within a string,
+it is escaped with a backslash per the JSON spec. Some will need to use the
+<code>\uHHHH</code> hex escapement.</p>
+<p>All other characters are NOT to be escaped. For example a <code>\u00E3</code> will be
+normalized to a direct <code>ã</code> character.</p>
+<p>There is no character limit to a string.</p>
+<h2 id="regarding-rtl-languages">REGARDING RTL LANGUAGES</h2>
+<p>Ultimately, the ordering of the UTF8 characters in a string is to be determined
+by the applications using the JSON documents. As such, that detail is outside
+the specification.</p>
+<p>It should be noted, however, that the most common method of character order
+storage in strings is by first-to-last usage order, NOT the LTR vs RTL display
+order.</p>
+<p>In fact, the JSON specification does not presume left to right. It is ordered
+by first to last. If a boolean value is <code>true</code> for example, it will probably
+display <code>true</code> when <em>viewed</em> LTR, and will displayed <code>eurt</code> when <em>viewed</em> RTL.
+What is important is that the <code>t</code> is at index +0 and the <code>e</code> is at index +3. How
+it is displayed is a matter of presentation.</p>
+<h2 id="objects">OBJECTS</h2>
+<p>A JSON document, when normalized, must be based on an object.</p>
+<p>Every object starts with a LEFT CURLY BRACKET (U+007B) <code>{</code>, which ends the line.</p>
+<p>Every object ends on a line starting with an RIGHT CURLY BRACKET (U+007D) <code>}</code>. If
+needed, then a comma immediately follows. Otherwise, the line ends also.</p>
+<p>The open and closing brackets are at the SAME level of indentation. And empty
+object has no line between that starting line and the ending line. An empty
+object may NOT be represented by a curly bracket pair  <code>{}</code> on a single line.</p>
+<p>An object has zero or more elements, each of which has a name, a colon, and a
+value. (See JSON spec.) The order of these is SORTED by name (see NAME
+SORTING next).</p>
+<p>Names may not be duplicated in the context of a single object. The JSON spec
+allows repeating of the same name, but JSONNORM does NOT.</p>
+<p>The name is a string. It is immediately followed by a colon. That is then
+followed by a single SPACE. That is then followed by the value (or start of
+the value if an object or array).</p>
+<p>Each name/value element is separated by a comma. The comma is placed
+immediately after the value and is followed by the LINE FEED that ends the line.</p>
+<p>The JSON spec does not allow for &ldquo;trailing commas&rdquo; in a list of name/values, so
+inserting an name/value element to the end of an object will appear as a &ldquo;change to the
+last line&rdquo; (to add the comma) plus the insertion of the new line.</p>
+<h2 id="name-sorting">NAME SORTING</h2>
+<p>The fields in an object are to be sorted by their name so that the same data
+is always represented in the same order.</p>
+<p>It is tempting sort using the official Unicode collation algorithm.
+That algorithm would sort the fields in strict alphabetic order that is very
+familiar to human readers. For example, the collation algorithm would sort the
+following characters in this order:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>A a à B
+</span></span></code></pre></div><p>Unfortunately, the collation algorithm has two problems:</p>
+<ol>
+<li>(major) The algorithm changes. In fact, UTF8 itself changes as new characters
+are added/removed by the Unicode Consortium. The collation algorithmm itself
+changes. It is currently on version 14.</li>
+<li>(minor) The algorithm is very complex and not available in all computer
+languages.</li>
+</ol>
+<p>Predictability is more important for normalization than human comfort. So,
+instead the name strings are to be simply sorted by UTF8 character.</p>
+<p>Unfortunately, this means the example list would be sorted</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>A B a à
+</span></span></code></pre></div><p>which is less intuitive.</p>
+<p>Please note that this is not the same thing as sorting by byte (like one can
+do with ASCII strings.) Instead, each UTF8 character, which can be 8, 16 or
+32 bits in size, should be placed into unsigned 32-bit integer arrays. And
+those arrays are used as the source of determining whether one name comes
+before another.</p>
+<p>Duplicate names are forbidden in the context of an object&rsquo;s name/value
+list.</p>
+<h2 id="arrays">ARRAYS</h2>
+<p>A JSON array is an ordered sequence of unnamed values.</p>
+<p>A JSON array is NOT an array in the strict sense <a href="https://en.wikipedia.org/wiki/Array_(data_structure)">used in Computer
+Science</a>.
+Computer Science defines an array as an ordered sequence of entries of the same
+type/size. But a JSON array allows mixed types. So it is <em>technically</em> a
+<strong>list</strong>. The unfortunate naming is due to the historical connection of JSON
+to Javascript which  is historically connected to C, which used
+arrays-of-pointers to store mixed data-type lists. However, to prevent
+confusion, we will still refer to these lists as arrays.</p>
+<p>The original spec leaves this nature undiscussed, so this specification
+states it explicitly: arrays may mix data types.</p>
+<div class="code sidebar-footer" id=""><div class="code-content" >
+      <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;a-list&#34;</span>: [
+</span></span><span style="display:flex;"><span>    <span style="color:#ae81ff">99</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">false</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">null</span>,
+</span></span><span style="display:flex;"><span>    [
+</span></span><span style="display:flex;"><span>      <span style="color:#ae81ff">19</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#e6db74">&#34;bob&#34;</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">true</span>
+</span></span><span style="display:flex;"><span>    ],
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;hello&#34;</span>
+</span></span><span style="display:flex;"><span>  ]
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
+  </div><span style="width: 100%; text-align: center;"><em>The value of &#34;a-list&#34; is a perfectly valid array. The 4th item in that array is also a perfectly valid array.</em></span></div>
+
+<p>The start of an array begins with a LEFT SQUARE BRACKET (U+005B) <code>[</code> and ends
+the current line.</p>
+<p>The entries of the array are indented by a further 2 spaces. Each entry
+starts it&rsquo;s own line.</p>
+<p>The end of an array is on a new line with a RIGHT SQUARE BRACKET (U+005D) <code>]</code>. It
+is followed by a comma if needed. Then the line is terminated with a LINE FEED.</p>
+<p>The open and closing brackets are always on separate lines even if the array
+is empty.</p>
+<p>The JSON spec does not allow for &ldquo;trailing commas&rdquo; in an array, so
+inserting a value to the end of an list will appear as a &ldquo;change to the
+last line&rdquo; (to add the comma) plus the insertion of the new line.</p>
+<h2 id="empty-vs-unknown-vs-void">EMPTY VS UNKNOWN VS VOID</h2>
+<p>Philosophically, there are subtle but real distinctions between these three
+concepts and the original JSON spec <em>implies</em> them, but does not address the
+issue explicity.</p>
+<p>All three ideas represent &ldquo;missing&rdquo; or not-existent values. They are
+represented in three different ways in JSON. JSONNORM is very explicit about
+this to avoid confusion.</p>
+<h4 id="empty">EMPTY</h4>
+<p>An empty value is a real value, but that value is &ldquo;nothing&rdquo; or
+&ldquo;emptiness&rdquo; or &ldquo;the scale of nothing&rdquo;.</p>
+<p>In a document, they are represented as:</p>
+<table>
+<thead>
+<tr>
+<th>value type</th>
+<th>empty</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>string</td>
+<td><code>&quot;&quot;</code></td>
+</tr>
+<tr>
+<td>number</td>
+<td><code>0</code></td>
+</tr>
+<tr>
+<td>object</td>
+<td><code>{</code><br><code>}</code></td>
+</tr>
+<tr>
+<td>array</td>
+<td><code>[</code><br><code>]</code></td>
+</tr>
+</tbody>
+</table>
+<p>The boolean value type (<code>true</code>/<code>false</code>) has no &ldquo;empty&rdquo; representation. It
+is common in most computer languages to use <code>false</code> as a stand-in for empty.
+So, this specification will also use <code>false</code> has the less-than-ideal meaning of
+boolean emptiness.</p>
+<p>An example of emptiness in mathematics:</p>
+<p><strong>3 + 0 = 3</strong> ∴ <em>Adding nothing to 3 results in 3.</em></p>
+<h4 id="unknown">UNKNOWN</h4>
+<p>In computer science, a value that is not yet known (or might not ever be
+known), is called a <code>NULL</code> or <code>NUL</code>. There is a theoretical value, but it is
+simply not known in the context.</p>
+<p>In JSON, a &ldquo;value type&rdquo; of <code>null</code> is given to represent this concept.</p>
+<p>This is why a list such as <code>[3, 2, null, -5]</code> has four values, not three. One of them is
+simply not known.</p>
+<p><a href="https://learnsql.com/blog/what-is-null-in-sql/#:~:text=Simply%20put%2C%20an%20SQL%20NULL,until%20the%20order%20has%20arrived.">reference from SQL for
+NULL</a></p>
+<p>Note: verbally, is it more accurate to say &ldquo;this value is null&rdquo; than &ldquo;this
+value equals null.&rdquo;</p>
+<p>Note: <code>NULL</code> is <em>not</em> the same thing as a <code>NIL</code>. <code>NIL</code> is an empty pointer or
+reference often used in computer programming. So, <code>NIL</code> is the EMPTY state for a
+value type of &ldquo;pointer&rdquo;. JSON does not explicitly store pointer values, so <code>NIL</code>
+is never used in JSON.</p>
+<p>Note: <code>&quot;null&quot;</code> and <code>null</code> are different things in JSON. The first is a four
+letter string containing the word &ldquo;null&rdquo;, the second is an actual null.</p>
+<p>An example of NULL in mathematics:</p>
+<p><strong>3 + x = y</strong> ∴ <em>Adding unknown x to 3 results in unknown y.</em></p>
+<p>So, if later, the first NULL (x) is found to be 5, then the second NULL (y) will
+become 8. Essentially, a NULL is an variable whose value is not known.</p>
+<h4 id="void">VOID</h4>
+<p>There are multiple names for this concept. In the programming language C it is
+called <code>void</code>. In paperwork, it is often called &ldquo;non-applicable&rdquo;.</p>
+<p>It is explicitly stating that there cannot be a value; not simply that it
+is not known.</p>
+<p>In JSON, a VOID is represented by ommision. In other words, you can
+represent VOID by <em>not</em> including a value in the document. Because JSON structure is
+dynamic, this works quite well.</p>
+<p>An example using real world objects:</p>
+<ul>
+<li>a spider has 8 legs,</li>
+<li>a worm has zero legs (EMPTY),</li>
+<li>an unknown creature trapped in a box has an unknown number of legs (NULL), but</li>
+<li>an asteroid can&rsquo;t have legs; it is a silly question (VOID).</li>
+</ul>
+<p>An example in mathematics:</p>
+<p><strong>3 + ∄ x = 3</strong> ∴ <em>There does not exist x, so it is not added to 3, which results in 3.</em></p>
+<h3 id="example-of-all-three-in-one-document">Example of All Three in One document</h3>
+<p>With the following document for values A, B, C, and D:</p>
+<div class="code sidebar-footer" id=""><div class="code-content" >
+      <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;A&#34;</span>: [
+</span></span><span style="display:flex;"><span>    <span style="color:#ae81ff">1</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#ae81ff">2</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#ae81ff">3</span>
+</span></span><span style="display:flex;"><span>  ],
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;B&#34;</span>: [
+</span></span><span style="display:flex;"><span>  ],
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;C&#34;</span>: <span style="color:#66d9ef">null</span>
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
+  </div></div>
+
+<ul>
+<li>&ldquo;A&rdquo; has a list that is not empty.</li>
+<li>&ldquo;B&rdquo; has a list that is EMPTY.</li>
+<li>&ldquo;C&rdquo; has an UNKNOWN value.</li>
+<li>&ldquo;D&rdquo; is VOID as it is ommitted from the document.</li>
+</ul>
+<p>Sadly, some public programming libraries and frameworks cannot easily distinquish
+between these three conditions and tend to convolute them.</p>
+<p>In fact, arbitrarily treating missing parameters (VOID) as NULL values is a
+known attack vector against some web frameworks. But discussing this is outside
+the scope of this specification.</p>
+<h2 id="numbers">NUMBERS</h2>
+<p>Normalizing numbers in JSON spec has at least 5 challenges:</p>
+<ol>
+<li><code>[infinity]</code> Numbers can be infinite in size. Is this realistic?</li>
+<li><code>[diff exp]</code> With exponent support there are multiple ways to express the exact same
+number. (<code>1.23E4</code> vs <code>12.3E3</code>)</li>
+<li><code>[marker]</code> The exponent marker can either be lower case <code>e</code> or upper case <code>E</code>.</li>
+<li><code>[sig]</code> There is no discussion of significance (or the related concept of
+precision).
+(e.g. <code>1.00</code> vs <code>1.000</code>) Is significance stored or ignored?</li>
+<li><code>[bin]</code> Numbers are expressed in decimal but a common source-of-truth for JSON,
+Javascript, stores them as binary floats; not decimal floats. Binary is
+base 2 and Decimal is base 10 (2 * 5). This causes conversion errors in some
+circumstances. (This is not a bug but a philosophical difference between
+numbering systems.) Most libraries follow this convention of storing in binary.</li>
+</ol>
+<p>This section of the specification resolves these issues, but acknowledges that
+the chosen answer is not perfect for all users.</p>
+<p>Numbers are to be stored in a manner that complies with IEEE 754-2008 decimal
+128-bit standard using DPD encoding as it commonly expressed in libraries.
+This does NOT mean that an app or library that reads or
+writes JSONNORM compliant documents must store the numbers in decimal. It
+simply means that the expression of the number must match that format.</p>
+<p>So, the chosen answer to the above restrictions are:</p>
+<ol>
+<li><code>[infinity]</code> Numbers are limited to 11 digits of precision. That is, the main
+number cannot have more than 11 decimal digits. If converting to JSONNORM
+the remaining digits are rounded per the well known
+<a href="https://wiki.c2.com/?BankersRounding">BANKERS ROUNDING</a> algorithm.
+The exponent is limited to the range −6143 to +6144. If a greater/lesser
+exponent is needed, the document is not expressable in JSONNORM.
+Examples: <code>1.23456789012345</code> becomes <code>1.2345678901</code>. <code>9876543210987654</code> becomes
+<code>9.8765432110E15</code> (notice the rounding).</li>
+<li><code>[diff exp]</code> Numbers needing an exponent are expressed in scientific notation,
+which has a single leading digit before the decimal point. Other numbers do
+not use the exponent. So, <code>10.0E4</code> becomes <code>1.00E5</code>.
+And, <code>1.00E2</code> becomes <code>100</code>.</li>
+<li><code>[marker]</code> Use upper case <code>E</code>. If the exponent is negative, prefix with a <code>-</code>,
+but if the exponent is positive do NOT prefix with a plus sign.
+Examples: <code>3.243E20</code> and <code>9.999900E-338</code></li>
+<li><code>[sig]</code> Significance and precision are expressable. So, <code>1.0</code> and <code>1.000</code> are
+different numbers.
+This specification does not require that the app using those numbers actually
+honors precision or not. It is, however, expressed and honored as if it did.</li>
+<li><code>[bin]</code> Numbers are expressed per the IEEE 754-2008 128-bit DPD-encoding
+characteristics. Individual apps might or might not actually honor those
+characteristics, but documents will be expressed as if they were.</li>
+</ol>
+<p>Leading zeroes are not permmitted. This is already part of the JSON spec.</p>
+<p>Note: The IEEE 754-2008 encoding allows for infinity (<code>+inf</code> <code>-inf</code>) and not-a-number
+(<code>NaN</code>). However, neither JSON or JSONNORM documents allow for such expressions.</p>
+<div class="edit-meta">
+Last updated on 8 Jul 2023
+
+
+<br>
+Published on 8 Jul 2023
+<br></div><nav class="pagination"><a class="nav nav-prev" href="http://jsonnorm.codes/" title="JSON Normalized"><i class="fas fa-arrow-left" aria-hidden="true"></i>&nbsp;Prev - JSON Normalized</a>
+
+</nav><footer><p class="powered">Powered by <a href="https://gohugo.io">Hugo</a>. Theme by <a href="https://themes.gohugo.io/hugo-theme-techdoc/">TechDoc</a>. Designed by <a href="https://github.com/thingsym/hugo-theme-techdoc">Thingsym</a>.</p>
+</footer>
+</main>
+<div class="sidebar">
+
+<nav class="open-menu">
+<ul>
+<li class=""><a href="http://jsonnorm.codes/">Home</a></li>
+
+<li class=" active"><a href="http://jsonnorm.codes/specification/">Specification of JSONNORM 1.0.0</a>
+  
+</li>
+</ul>
+</nav>
+
+
+
+<div class="sidebar-footer"></div>
+</div>
+
+</div><a href="#" id="backtothetop-fixed" class="backtothetop"
+ data-backtothetop-duration="600"
+ data-backtothetop-easing="easeOutQuart"
+ data-backtothetop-fixed-fadeIn="1000"
+ data-backtothetop-fixed-fadeOut="1000"
+ data-backtothetop-fixed-bottom="10"
+ data-backtothetop-fixed-right="20">
+<span class="fa-layers fa-fw">
+<i class="fas fa-circle"></i>
+<i class="fas fa-arrow-circle-up"></i>
+</span></a>
+</div>
+</body>
+</html>
